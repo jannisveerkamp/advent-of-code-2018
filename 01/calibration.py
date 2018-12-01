@@ -1,2 +1,5 @@
 def frequency(input):
-    return -1
+    sum = 0
+    for number in input:
+        sum += int(number)
+    return sum
