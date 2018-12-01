@@ -42,4 +42,4 @@ class TestFrequencyTwice(unittest.TestCase):
 
     def test_frequency_input(self):
         test_input = read_file_lines(__file__, "input.txt")
-        self.assertEqual(frequency_twice(test_input), -1)
+        self.assertEqual(frequency_twice(test_input), 80598)
