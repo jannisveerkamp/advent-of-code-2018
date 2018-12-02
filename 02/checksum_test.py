@@ -12,4 +12,4 @@ class TestChecksum(unittest.TestCase):
 
     def test_checksum_input(self):
         test_input = read_file_lines(__file__, "input.txt")
-        self.assertEqual(checksum(test_input), -1)
+        self.assertEqual(checksum(test_input), 6944)
