@@ -15,4 +15,17 @@ def checksum(box_ids):
 
 
 def common_for_correct_box_ids(box_ids):
+    for box_id in box_ids:
+        for inner_id in box_ids:
+            diff = difference(box_id, inner_id)
+            if len(inner_id) == len(diff) + 1:
+                return diff
     return ""
+
+
+def difference(id_1, id_2):
+    result = ""
+    for i in range(len(id_1)):
+        if id_1[i] == id_2[i]:
+            result += id_1[i]
+    return result

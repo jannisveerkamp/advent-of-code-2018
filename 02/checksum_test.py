@@ -23,4 +23,4 @@ class TestCorrectBoxIds(unittest.TestCase):
 
     def test_checksum_input(self):
         test_input = read_file_lines(__file__, "input.txt")
-        self.assertEqual(common_for_correct_box_ids(test_input), "a")
+        self.assertEqual(common_for_correct_box_ids(test_input), "srijafjzloguvlntqmphenbkd")
