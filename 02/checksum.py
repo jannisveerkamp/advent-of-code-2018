@@ -12,3 +12,7 @@ def checksum(box_ids):
             threes += 1
 
     return twos * threes
+
+
+def common_for_correct_box_ids(box_ids):
+    return ""
