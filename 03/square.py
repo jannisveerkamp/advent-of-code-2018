@@ -18,3 +18,7 @@ def overlap(claims):
                 matrix[x][y] += 1
 
     return sum(sum(y > 1 for y in x) for x in matrix)
+
+
+def no__overlap(claims):
+    return -1
