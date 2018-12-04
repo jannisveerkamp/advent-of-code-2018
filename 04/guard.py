@@ -3,13 +3,13 @@ from datetime import datetime
 
 
 class Record:
-    pattern = re.compile("\[(?P<date>.*)\] (Guard #)*(?P<guard>\d+)*( begins shift)*(?P<action>.*)")
+    pattern = re.compile("\[(?P<date>.*)\] (Guard #)*(?P<guard_id>\d+)*( begins shift)*(?P<action>.*)")
 
     def __init__(self, claim):
         match = self.pattern.match(claim)
         self.date = datetime.strptime(match.group("date"), "%Y-%m-%d %H:%M")
-        guard = match.group("guard")
-        self.guard_number = 0 if guard is None else int(guard)  # optional
+        guard_id = match.group("guard_id")
+        self.guard_id = 0 if guard_id is None else int(guard_id)  # optional
         self.action = match.group("action")  # optional
 
 
@@ -24,15 +24,17 @@ def find_sleepiest_guard(records):
             sleepiest_guard = key
             max_sleep = value
 
-    return __get_max({sleepiest_guard: guard_sleeptimes[sleepiest_guard]})
+    # only pass the most sleepy guard
+    return __max_index_times_sleepiest_guard_id({sleepiest_guard: guard_sleeptimes[sleepiest_guard]})
 
 
 def find_sleepiest_guard_2(records):
     guard_sleeptimes, guard_total_sleeptimes = __get_guard_sleeptimes(records)
-    return __get_max(guard_sleeptimes)
+    # get the max value of all guards
+    return __max_index_times_sleepiest_guard_id(guard_sleeptimes)
 
 
-def __get_max(guard_sleeptimes):
+def __max_index_times_sleepiest_guard_id(guard_sleeptimes):
     sleepiest_guard = 0
     max_minutes = 0
     max_index = 0
@@ -60,8 +62,8 @@ def __get_guard_sleeptimes(records):
     sleep_time = datetime.now()
 
     for record in parsed_records:
-        if record.guard_number != 0:
-            current_guard = record.guard_number
+        if record.guard_id != 0:
+            current_guard = record.guard_id
         else:
             if record.action == "falls asleep":
                 sleep_time = record.date
