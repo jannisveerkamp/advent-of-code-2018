@@ -95,4 +95,4 @@ class TestSleepiestGuard2(unittest.TestCase):
 
     def test_find_sleepiest_guard_2_input(self):
         test_input = read_file_lines(__file__, "input.txt")
-        self.assertEqual(find_sleepiest_guard_2(test_input), -1)
+        self.assertEqual(find_sleepiest_guard_2(test_input), 49137)
