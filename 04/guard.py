@@ -19,7 +19,6 @@ def find_sleepiest_guard(records):
     parsed_records = []
     for record in records:
         parsed_records.append(Record(record))
-    # parsed_records = sorted(parsed_records, lambda x: x.[2])
     parsed_records.sort(key=lambda x: x.date)
 
     # get guard sleeptimes
@@ -64,3 +63,7 @@ def find_sleepiest_guard(records):
             max_minutes = value
 
     return sleepiest_guard * max_index
+
+
+def find_sleepiest_guard_2(records):
+    return 0
