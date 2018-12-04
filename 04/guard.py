@@ -17,24 +17,19 @@ def find_sleepiest_guard(records):
     guard_sleeptimes, guard_total_sleeptimes = __get_guard_sleeptimes(records)
 
     # find most sleepy guard first
-    max_sleep = 0
-    sleepiest_guard = 0
-    for key, value in guard_total_sleeptimes.items():
-        if value > max_sleep:
-            sleepiest_guard = key
-            max_sleep = value
+    sleepiest_guard = max(guard_total_sleeptimes, key=lambda key: guard_total_sleeptimes[key])
 
     # only pass the most sleepy guard
-    return __max_index_times_sleepiest_guard_id({sleepiest_guard: guard_sleeptimes[sleepiest_guard]})
+    return __max_minutes_times_sleepiest_guard_id({sleepiest_guard: guard_sleeptimes[sleepiest_guard]})
 
 
 def find_sleepiest_guard_2(records):
     guard_sleeptimes, guard_total_sleeptimes = __get_guard_sleeptimes(records)
     # get the max value of all guards
-    return __max_index_times_sleepiest_guard_id(guard_sleeptimes)
+    return __max_minutes_times_sleepiest_guard_id(guard_sleeptimes)
 
 
-def __max_index_times_sleepiest_guard_id(guard_sleeptimes):
+def __max_minutes_times_sleepiest_guard_id(guard_sleeptimes):
     sleepiest_guard = 0
     max_minutes = 0
     max_index = 0
@@ -45,6 +40,7 @@ def __max_index_times_sleepiest_guard_id(guard_sleeptimes):
                 max_index = idx
                 max_minutes = value
                 sleepiest_guard = guard
+
     return max_index * sleepiest_guard
 
 
