@@ -1,12 +1,12 @@
 import unittest
 
 from common.file import read_file_lines
-from .guard import sleepiest_guard
+from .guard import find_sleepiest_guard
 
 
 class TestOverlap(unittest.TestCase):
 
-    def test_simple_overlap(self):
+    def test_simple_find_sleepiest_guard(self):
         test_input = ["[1518-11-01 00:00] Guard #10 begins shift",
                       "[1518-11-01 00:05] falls asleep",
                       "[1518-11-01 00:25] wakes up",
@@ -24,8 +24,28 @@ class TestOverlap(unittest.TestCase):
                       "[1518-11-05 00:03] Guard #99 begins shift",
                       "[1518-11-05 00:45] falls asleep",
                       "[1518-11-05 00:55] wakes up"]
-        self.assertEqual(sleepiest_guard(test_input), 240)
+        self.assertEqual(find_sleepiest_guard(test_input), 240)
 
-    def test_checksum_input(self):
+    def test_simple_find_sleepiest_guard_unsorted(self):
+        test_input = ["[1518-11-01 00:55] wakes up",
+                      "[1518-11-01 00:25] wakes up",
+                      "[1518-11-01 00:30] falls asleep",
+                      "[1518-11-01 23:58] Guard #99 begins shift",
+                      "[1518-11-02 00:40] falls asleep",
+                      "[1518-11-03 00:05] Guard #10 begins shift",
+                      "[1518-11-02 00:50] wakes up",
+                      "[1518-11-03 00:29] wakes up",
+                      "[1518-11-03 00:24] falls asleep",
+                      "[1518-11-05 00:55] wakes up",
+                      "[1518-11-01 00:05] falls asleep",
+                      "[1518-11-05 00:03] Guard #99 begins shift",
+                      "[1518-11-04 00:02] Guard #99 begins shift",
+                      "[1518-11-04 00:36] falls asleep",
+                      "[1518-11-04 00:46] wakes up",
+                      "[1518-11-01 00:00] Guard #10 begins shift",
+                      "[1518-11-05 00:45] falls asleep"]
+        self.assertEqual(find_sleepiest_guard(test_input), 240)
+
+    def test_find_sleepiest_guard_input(self):
         test_input = read_file_lines(__file__, "input.txt")
-        self.assertEqual(sleepiest_guard(test_input), -1)
+        self.assertEqual(find_sleepiest_guard(test_input), 72925)
