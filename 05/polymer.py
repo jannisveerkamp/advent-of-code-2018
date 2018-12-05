@@ -1,16 +1,13 @@
 def reduce_polymer(polymer):
-    should_remove = True
-    while should_remove:
-        should_remove = False
+    temp_string = ""
+    for char in polymer:
+        next_char = "" if not temp_string else temp_string[-1]
+        if should_remove_characters(char, next_char):
+            temp_string = temp_string[:-1]
+        else:
+            temp_string += char
 
-        i = 0
-        while i < len(polymer) - 1:
-            if should_remove_characters(polymer[i], polymer[i + 1]):
-                polymer = polymer[:i] + polymer[i + 2:]
-                should_remove = True
-            i += 1
-
-    return len(polymer)
+    return len(temp_string)
 
 
 def should_remove_characters(a, b):
