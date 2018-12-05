@@ -37,9 +37,9 @@ class TestPolymerReduce(unittest.TestCase):
         test_input = "dabAcCaCBAcCcaDA"
         self.assertEqual(reduce_polymer(test_input), 10)
 
-    # def test_reduce_polymer_input(self):
-    #    test_input = read_file(__file__, "input.txt")
-    #    self.assertEqual(reduce_polymer(test_input), 11754)
+    def test_reduce_polymer_input(self):
+        test_input = read_file(__file__, "input.txt")
+        self.assertEqual(reduce_polymer(test_input), 11754)
 
 
 class TestPolymerRemoveUnit(unittest.TestCase):
