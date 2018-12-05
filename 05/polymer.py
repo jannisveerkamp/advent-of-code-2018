@@ -10,20 +10,13 @@ def reduce_polymer(polymer):
     return len(temp_string)
 
 
-def should_remove_characters(a, b):
-    return a.lower() == b.lower() and a.isupper() != b.isupper()
-
-
 def remove_unit_from_polymer(polymer):
     chars = find_all_characters(polymer)
+    return min(reduce_polymer(polymer.replace(c.lower(), "").replace(c.upper(), "")) for c in chars)
 
-    min_length = 100000
-    for char in chars:
-        removed = polymer.replace(char.lower(), "").replace(char.upper(), "")
-        length = reduce_polymer(removed)
-        min_length = min(length, min_length)
 
-    return min_length
+def should_remove_characters(a, b):
+    return a.lower() == b.lower() and a.isupper() != b.isupper()
 
 
 def find_all_characters(polymer):
