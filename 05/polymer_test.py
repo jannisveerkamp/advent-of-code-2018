@@ -40,3 +40,30 @@ class TestPolymerReduce(unittest.TestCase):
     def test_reduce_polymer_input(self):
         test_input = read_file(__file__, "input.txt")
         self.assertEqual(reduce_polymer(test_input), 11754)
+
+
+class TestPolymerRemoveUnit(unittest.TestCase):
+
+    def test_remove_unit_from_polymer_1(self):
+        test_input = "aA"
+        self.assertEqual(reduce_polymer(test_input), 0)
+
+    def test_remove_unit_from_polymer_2(self):
+        test_input = "abBA"
+        self.assertEqual(reduce_polymer(test_input), 0)
+
+    def test_remove_unit_from_polymer_3(self):
+        test_input = "abAB"
+        self.assertEqual(reduce_polymer(test_input), 0)
+
+    def test_remove_unit_from_polymer_4(self):
+        test_input = "aabAAB"
+        self.assertEqual(reduce_polymer(test_input), 0)
+
+    def test_remove_unit_from_polymer_5(self):
+        test_input = "dabAcCaCBAcCcaDA"
+        self.assertEqual(reduce_polymer(test_input), 4)
+
+    def test_remove_unit_from_polymer_input(self):
+        test_input = read_file(__file__, "input.txt")
+        self.assertEqual(reduce_polymer(test_input), 0)

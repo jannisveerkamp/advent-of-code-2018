@@ -13,3 +13,7 @@ def reduce_polymer(polymer):
 
 def should_remove_characters(a, b):
     return a.lower() == b.lower() and a.isupper() != b.isupper()
+
+
+def remove_unit_from_polymer(polymer):
+    return -1
