@@ -18,4 +18,20 @@ def should_remove_characters(a, b):
 
 
 def remove_unit_from_polymer(polymer):
-    return -1
+    chars = find_all_characters(polymer)
+
+    min_length = 100000
+    for char in chars:
+        removed = polymer.replace(char.lower(), "").replace(char.upper(), "")
+        length = reduce_polymer(removed)
+        min_length = min(length, min_length)
+
+    return min_length
+
+
+def find_all_characters(polymer):
+    chars = set()
+    for i in range(len(polymer)):
+        if polymer[i].lower() not in chars:
+            chars.add(polymer[i].lower())
+    return chars
