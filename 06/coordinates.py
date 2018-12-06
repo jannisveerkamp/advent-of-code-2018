@@ -39,7 +39,7 @@ def size_largest_area(coordinates):
 
     infinite_areas = set()
 
-    temp_area = [[{area[y][x]} for x in range(x_max)] for y in range(y_max)]
+    temp_area = [[{area[y][x]} if area[y][x] != EMPTY else set() for x in range(x_max)] for y in range(y_max)]
 
     # do some black magic
     while EMPTY in [x for y in area for x in y]:
@@ -49,8 +49,7 @@ def size_largest_area(coordinates):
                 if cell != EMPTY:
                     if y == 0 or y == y_max - 1 or x == 0 or x == x_max - 1:
                         infinite_areas.add(cell)
-                    # fill around cell
-                    fill_round_cell(temp_area, cell, x, y, x_max, y_max)
+                    fill_around_cell(temp_area, cell, x, y, x_max, y_max)
         update_area(area, temp_area, x_max, y_max)
 
     max_area_size = 0
@@ -61,21 +60,15 @@ def size_largest_area(coordinates):
     return max_area_size
 
 
-def fill_round_cell(temp_area, cell, x, y, x_max, y_max):
+def fill_around_cell(temp_area, cell, x, y, x_max, y_max):
     if x != 0:
-        fill(temp_area, cell, x - 1, y)
+        temp_area[y][x - 1].add(cell)
     if y != 0:
-        fill(temp_area, cell, x, y - 1)
+        temp_area[y - 1][x].add(cell)
     if x != x_max - 1:
-        fill(temp_area, cell, x + 1, y)
+        temp_area[y][x + 1].add(cell)
     if y != y_max - 1:
-        fill(temp_area, cell, x, y + 1)
-
-
-def fill(temp_area, cell, x, y):
-    if EMPTY in temp_area[y][x]:
-        temp_area[y][x].remove(EMPTY)
-    temp_area[y][x].add(cell)
+        temp_area[y + 1][x].add(cell)
 
 
 def update_area(area, temp_area, x_max, y_max):
