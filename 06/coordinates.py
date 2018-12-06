@@ -2,7 +2,7 @@ EMPTY = "."
 MULTI = "x"
 
 
-def size_safe_are(coordinates):
+def size_safe_are(coordinates, max_sum_distance):
     return -1
 
 

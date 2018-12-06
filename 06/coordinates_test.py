@@ -27,4 +27,4 @@ class TestSafeArea(unittest.TestCase):
 
     def test_simple_safe_area(self):
         test_input = ["1, 1", "1, 6", "8, 3", "3, 4", "5, 5", "8, 9"]
-        self.assertEqual(size_safe_are(test_input), 16)
+        self.assertEqual(size_safe_are(test_input, 32), 16)
