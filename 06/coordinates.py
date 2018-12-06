@@ -1,9 +1,30 @@
 EMPTY = "."
 MULTI = "x"
+UNSAFE = "o"
 
 
 def size_safe_are(coordinates, max_sum_distance):
-    return -1
+    coordinates = parse_coordinates(coordinates)
+    x_max, y_max = get_array_size(coordinates)
+
+    area = [[EMPTY for _ in range(x_max)] for _ in range(y_max)]
+
+    for y in range(y_max):
+        for x in range(x_max):
+            distance_sum = 0
+            for coordinate in coordinates:
+                distance = manhattan_distance(x, y, coordinate[0], coordinate[1])
+                distance_sum += distance
+                if distance_sum >= max_sum_distance:
+                    area[y][x] = UNSAFE
+                    continue
+
+    safe_area_size = sum(x.count(EMPTY) for x in area)
+    return safe_area_size
+
+
+def manhattan_distance(x1, y1, x2, y2):
+    return abs(x1 - x2) + abs(y1 - y2)
 
 
 def size_largest_area(coordinates):
@@ -15,8 +36,6 @@ def size_largest_area(coordinates):
     # put the coordinates into the area
     for i in range(len(coordinates)):
         area[coordinates[i][1]][coordinates[i][0]] = str(i)
-    # print_area(area)
-    # print("")
 
     infinite_areas = set()
 
@@ -33,8 +52,6 @@ def size_largest_area(coordinates):
                     # fill around cell
                     fill_round_cell(temp_area, cell, x, y, x_max, y_max)
         update_area(area, temp_area, x_max, y_max)
-
-    # print_area(area)
 
     max_area_size = 0
     for i in range(len(coordinates)):

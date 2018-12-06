@@ -32,4 +32,4 @@ class TestSafeArea(unittest.TestCase):
 
     def test_size_largest_area_input(self):
         test_input = read_file_lines(__file__, "input.txt")
-        self.assertEqual(size_safe_are(test_input, 10000), 0)
+        self.assertEqual(size_safe_are(test_input, 10000), 35490)
