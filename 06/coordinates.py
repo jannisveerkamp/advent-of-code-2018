@@ -3,7 +3,7 @@ MULTI = "x"
 UNSAFE = "o"
 
 
-def size_safe_are(coordinates, max_sum_distance):
+def size_safe_area(coordinates, max_sum_distance):
     coordinates = parse_coordinates(coordinates)
     x_max, y_max = get_array_size(coordinates)
 
@@ -30,6 +30,7 @@ def manhattan_distance(x1, y1, x2, y2):
 def size_largest_area(coordinates):
     coordinates = parse_coordinates(coordinates)
     x_max, y_max = get_array_size(coordinates)
+    size = len(coordinates)
 
     area = [[EMPTY for _ in range(x_max)] for _ in range(y_max)]
 
@@ -39,36 +40,46 @@ def size_largest_area(coordinates):
 
     infinite_areas = set()
 
-    temp_area = [[{area[y][x]} if area[y][x] != EMPTY else set() for x in range(x_max)] for y in range(y_max)]
-
-    # Sadly this solution is slow
     while EMPTY in [x for y in area for x in y]:
-        for y in range(y_max):
-            for x in range(x_max):
-                cell = area[y][x]
-                if cell != EMPTY:
-                    if y == 0 or y == y_max - 1 or x == 0 or x == x_max - 1:
-                        infinite_areas.add(cell)
-                    fill_around_cell(temp_area, cell, x, y, x_max, y_max)
-        update_area(area, temp_area, x_max, y_max)
+        next_coordinates = []
+        candidates = dict()
+        for coordinate in coordinates:
+            x = coordinate[0]
+            y = coordinate[1]
+            cell = area[y][x]
+            if y == 0 or y == y_max - 1 or x == 0 or x == x_max - 1:
+                infinite_areas.add(cell)
+            if x != 0:
+                add_to_candidates(area, x - 1, y, candidates, cell)
+            if y != 0:
+                add_to_candidates(area, x, y - 1, candidates, cell)
+            if x != x_max - 1:
+                add_to_candidates(area, x + 1, y, candidates, cell)
+            if y != y_max - 1:
+                add_to_candidates(area, x, y + 1, candidates, cell)
+
+        for key, value in candidates.items():
+            if len(value) > 1:
+                area[key[0]][key[1]] = MULTI
+            else:
+                area[key[0]][key[1]] = str(next(iter(value)))
+            next_coordinates.append((key[1], key[0]))
+        coordinates = next_coordinates
 
     max_area_size = 0
-    for i in range(len(coordinates)):
+    for i in range(size):
         if str(i) not in infinite_areas:
             max_area_size = max(max_area_size, sum(x.count(str(i)) for x in area))
 
     return max_area_size
 
 
-def fill_around_cell(temp_area, cell, x, y, x_max, y_max):
-    if x != 0:
-        temp_area[y][x - 1].add(cell)
-    if y != 0:
-        temp_area[y - 1][x].add(cell)
-    if x != x_max - 1:
-        temp_area[y][x + 1].add(cell)
-    if y != y_max - 1:
-        temp_area[y + 1][x].add(cell)
+def add_to_candidates(area, x, y, candidates, number):
+    if area[y][x] == EMPTY:
+        if (y, x) in candidates:
+            candidates[(y, x)].add(number)
+        else:
+            candidates[(y, x)] = {number}
 
 
 def update_area(area, temp_area, x_max, y_max):

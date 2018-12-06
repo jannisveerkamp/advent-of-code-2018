@@ -1,7 +1,7 @@
 import unittest
 
 from common.file import read_file_lines
-from .coordinates import size_largest_area, get_array_size, parse_coordinates, size_safe_are, manhattan_distance
+from .coordinates import size_largest_area, get_array_size, parse_coordinates, size_safe_area, manhattan_distance
 
 
 class TestLargestArea(unittest.TestCase):
@@ -39,8 +39,8 @@ class TestSafeArea(unittest.TestCase):
 
     def test_simple_safe_area(self):
         test_input = ["1, 1", "1, 6", "8, 3", "3, 4", "5, 5", "8, 9"]
-        self.assertEqual(size_safe_are(test_input, 32), 16)
+        self.assertEqual(size_safe_area(test_input, 32), 16)
 
     def test_size_largest_area_input(self):
         test_input = read_file_lines(__file__, "input.txt")
-        self.assertEqual(size_safe_are(test_input, 10000), 35490)
+        self.assertEqual(size_safe_area(test_input, 10000), 35490)
