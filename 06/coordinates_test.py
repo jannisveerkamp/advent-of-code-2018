@@ -1,6 +1,6 @@
 import unittest
 
-from common.file import read_file
+from common.file import read_file_lines
 from .coordinates import size_largest_area, get_array_size, parse_coordinates
 
 
@@ -11,13 +11,14 @@ class TestLargestArea(unittest.TestCase):
         self.assertEqual(parse_coordinates(test_input), [[1, 1], [1, 6], [8, 3], [3, 4], [5, 5], [8, 9]])
 
     def test_get_array_size(self):
+        # size has to be one bigger than the biggest x/y coordinate
         test_input = [[1, 1], [1, 6], [8, 3], [3, 4], [5, 5], [8, 9]]
-        self.assertEqual(get_array_size(test_input), (8, 9))
+        self.assertEqual(get_array_size(test_input), (9, 10))
 
     def test_simple_size_largest_area(self):
         test_input = ["1, 1", "1, 6", "8, 3", "3, 4", "5, 5", "8, 9"]
         self.assertEqual(size_largest_area(test_input), 17)
 
     def test_size_largest_area_input(self):
-        test_input = read_file(__file__, "input.txt")
-        self.assertEqual(size_largest_area(test_input), 0)
+        test_input = read_file_lines(__file__, "input.txt")
+        self.assertEqual(size_largest_area(test_input), 4284)
