@@ -41,7 +41,7 @@ def size_largest_area(coordinates):
 
     temp_area = [[{area[y][x]} if area[y][x] != EMPTY else set() for x in range(x_max)] for y in range(y_max)]
 
-    # do some black magic
+    # Sadly this solution is slow
     while EMPTY in [x for y in area for x in y]:
         for y in range(y_max):
             for x in range(x_max):
