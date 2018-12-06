@@ -2,6 +2,10 @@ EMPTY = "."
 MULTI = "x"
 
 
+def size_safe_are(coordinates):
+    return -1
+
+
 def size_largest_area(coordinates):
     coordinates = parse_coordinates(coordinates)
     x_max, y_max = get_array_size(coordinates)
