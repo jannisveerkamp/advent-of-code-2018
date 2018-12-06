@@ -1,6 +1,10 @@
 def size_largest_area(coordinates):
     coordinates = parse_coordinates(coordinates)
-    xMax, yMax = get_array_size(coordinates)
+    x_max, y_max = get_array_size(coordinates)
+
+    area = [["." for _ in range(x_max)] for _ in range(y_max)]
+    print_area(area)
+
     return -1
 
 
@@ -16,3 +20,8 @@ def parse_coordinates(coordinates):
         x, y = coordinate.split(", ")
         parsed_coordinates.append([int(x), int(y)])
     return parsed_coordinates
+
+
+def print_area(area):
+    for x in area:
+        print("".join(x))
