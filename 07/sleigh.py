@@ -24,6 +24,10 @@ def sort_instructions(instructions):
     return "".join(result)
 
 
+def work_time(instructions):
+    return -1
+
+
 pattern = re.compile("Step (?P<step>\w) must be finished before step (?P<before>\w) can begin.")
 
 
