@@ -42,8 +42,8 @@ class TestWorker(unittest.TestCase):
                       "Step B must be finished before step E can begin.",
                       "Step D must be finished before step E can begin.",
                       "Step F must be finished before step E can begin."]
-        self.assertEqual(15, work_time(test_input))
+        self.assertEqual(15, work_time(test_input, 2, 0))
 
     def test_instructions_input_work_time(self):
         test_input = read_file_lines(__file__, "input.txt")
-        self.assertEqual(0, work_time(test_input))
+        self.assertEqual(0, work_time(test_input, 5, 60))

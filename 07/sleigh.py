@@ -24,7 +24,7 @@ def sort_instructions(instructions):
     return "".join(result)
 
 
-def work_time(instructions):
+def work_time(instructions, workers, seconds_offset):
     return -1
 
 
