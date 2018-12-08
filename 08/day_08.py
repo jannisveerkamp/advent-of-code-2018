@@ -17,6 +17,17 @@ class Node:
     def sum_metadata_entries(self):
         return sum(i for i in self.metadata_entries) + sum(node.sum_metadata_entries() for node in self.child_nodes)
 
+    def node_value(self):
+        if self.header_child_nodes == 0:
+            return sum(i for i in self.metadata_entries)
+        else:
+            sum_children = 0
+            for metadata_entry in self.metadata_entries:
+                if metadata_entry <= self.header_child_nodes:
+                    sum_children += self.child_nodes[metadata_entry - 1].node_value()
+
+            return sum_children
+
 
 def day_08_task_1(instructions):
     instructions = list(map(int, instructions.split(" ")))
@@ -25,4 +36,6 @@ def day_08_task_1(instructions):
 
 
 def day_08_task_2(instructions):
-    return -1
+    instructions = list(map(int, instructions.split(" ")))
+    tree = Node(instructions)
+    return tree.node_value()
