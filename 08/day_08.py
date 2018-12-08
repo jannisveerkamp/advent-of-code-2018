@@ -22,3 +22,7 @@ def day_08_task_1(instructions):
     instructions = list(map(int, instructions.split(" ")))
     tree = Node(instructions)
     return tree.sum_metadata_entries()
+
+
+def day_08_task_2(instructions):
+    return -1
