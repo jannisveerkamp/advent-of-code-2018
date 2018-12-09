@@ -32,4 +32,4 @@ class TestDay09Task1(unittest.TestCase):
 
     def test_day_09_task_1__input(self):
         test_input = read_file(__file__, "input.txt")
-        self.assertEqual(0, day_09_task_1(test_input))
+        self.assertEqual(367634, day_09_task_1(test_input))
