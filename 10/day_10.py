@@ -20,13 +20,8 @@ class Point:
 def parse_instructions(instructions):
     result = []
     for instruction in instructions:
-        match = pattern.match(instruction)
-        result.append(Point(
-            int(match.group("x")),
-            int(match.group("y")),
-            int(match.group("dx")),
-            int(match.group("dy")),
-        ))
+        m = pattern.match(instruction)
+        result.append(Point(int(m.group("x")), int(m.group("y")), int(m.group("dx")), int(m.group("dy"))))
     return result
 
 
@@ -37,14 +32,11 @@ def day_10(instructions, iterations, skip_iterations, return_on_max_y):
     for point in points:
         point.move_on(skip_iterations)
 
+    # The correct solution should have no big gap in the y direction. Ideally it SHOULD search for a minimum ;-)
     for i in range(0, iterations):
-        min_y = min(points, key=lambda p: p.y).y
-        max_y = max(points, key=lambda p: p.y).y
-
-        if max_y - min_y <= return_on_max_y:
+        if max(points, key=lambda p: p.y).y - min(points, key=lambda p: p.y).y <= return_on_max_y:
             print_points(points)
             return skip_iterations + i
-
         for point in points:
             point.move_on()
     return -1
