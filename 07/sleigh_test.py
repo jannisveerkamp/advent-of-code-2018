@@ -1,7 +1,7 @@
 import unittest
 
 from common.file import read_file_lines
-from .sleigh import sort_instructions, parse_instructions, work_time
+from .sleigh import sort_instructions, parse_instructions, work_time, letter_offset
 
 
 class TestInstructionSorting(unittest.TestCase):
@@ -34,6 +34,12 @@ class TestInstructionSorting(unittest.TestCase):
 
 class TestWorker(unittest.TestCase):
 
+    def test_letter_offset(self):
+        self.assertEqual(1, letter_offset("A"))
+        self.assertEqual(2, letter_offset("B"))
+        self.assertEqual(3, letter_offset("C"))
+        self.assertEqual(4, letter_offset("D"))
+
     def test_simple_instructions_work_time(self):
         test_input = ["Step C must be finished before step A can begin.",
                       "Step C must be finished before step F can begin.",
@@ -46,4 +52,4 @@ class TestWorker(unittest.TestCase):
 
     def test_instructions_input_work_time(self):
         test_input = read_file_lines(__file__, "input.txt")
-        self.assertEqual(0, work_time(test_input, 5, 60))
+        self.assertEqual(1265, work_time(test_input, 5, 60))
