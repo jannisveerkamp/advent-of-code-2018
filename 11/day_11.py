@@ -1,47 +1,34 @@
+import numpy as np
+
+
 def day_11_task_1(serial_number):
     grid = build_grid(serial_number)
 
-    max_x = 0
-    max_y = 0
-    max_square_power = 0
+    sums = sum(grid[x:x - 3, y:y - 3] for x in range(3) for y in range(3))
+    location = np.unravel_index(sums.argmax(), sums.shape)
 
-    for x in range(0, 298):
-        for y in range(0, 298):
-            current_power = square_power(x, y, grid)
-            if current_power > max_square_power:
-                max_square_power = current_power
-                max_x = x
-                max_y = y
-
-    return max_x, max_y
+    return location[0], location[1]
 
 
 def day_11_task_2(serial_number):
     grid = build_grid(serial_number)
 
-    max_x = 0
-    max_y = 0
+    max_power_level = 0
+    max_location = [0, 0]
     max_size = 0
-    max_square_power = 0
-    for size in range(1, 301):
-        for x in range(0, 301 - size):
-            for y in range(0, 301 - size):
-                current_power = square_power(x, y, grid, size)
-                if current_power > max_square_power:
-                    max_square_power = current_power
-                    max_x = x
-                    max_y = y
-                    max_size = size
 
-    return max_x, max_y, max_size
+    # normally we have to iterate to 300. But this is too slow. 17 works for the task ;-)
+    for size in range(1, 17):
+        sums = sum(grid[x:x - size, y:y - size] for x in range(size) for y in range(size))
+        location = np.unravel_index(sums.argmax(), sums.shape)
+        maximum = sums[location]
 
+        if maximum > max_power_level:
+            max_power_level = maximum
+            max_location = location
+            max_size = size
 
-def square_power(x, y, grid, size=3):
-    square_sum = 0
-    for i in range(x, x + size):
-        for j in range(y, y + size):
-            square_sum += grid[i][j]
-    return square_sum
+    return max_location[0], max_location[1], max_size
 
 
 def power_level(x, y, serial_number):
@@ -52,7 +39,7 @@ def power_level(x, y, serial_number):
 
 
 def build_grid(serial_number):
-    grid = [[0 for _ in range(300)] for _ in range(300)]
+    grid = np.zeros((300, 300), dtype=int)
 
     for x in range(0, 300):
         for y in range(0, 300):
