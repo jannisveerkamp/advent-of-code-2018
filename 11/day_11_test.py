@@ -3,7 +3,6 @@ import unittest
 from .day_11 import power_level, square_power, build_grid, day_11_task_1, day_11_task_2
 
 
-@unittest.skip("speedy!")
 class TestDay11Task1(unittest.TestCase):
 
     def test_day_11_power_level_1(self):
