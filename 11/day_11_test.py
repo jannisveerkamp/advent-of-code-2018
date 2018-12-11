@@ -1,8 +1,9 @@
 import unittest
 
-from .day_11 import power_level, square_power, build_grid, day_11_task_1
+from .day_11 import power_level, square_power, build_grid, day_11_task_1, day_11_task_2
 
 
+@unittest.skip("speedy!")
 class TestDay11Task1(unittest.TestCase):
 
     def test_day_11_power_level_1(self):
@@ -26,5 +27,17 @@ class TestDay11Task1(unittest.TestCase):
     def test_day_11_task_1_simple_input_2(self):
         self.assertEqual((21, 61), day_11_task_1(42))
 
-    def test_day_11_task_1__input(self):
+    def test_day_11_task_1_input(self):
         self.assertEqual((21, 68), day_11_task_1(2568))
+
+
+class TestDay11Task2(unittest.TestCase):
+
+    def test_day_11_task_2_simple_input_1(self):
+        self.assertEqual((90, 269, 16), day_11_task_2(18))
+
+    def test_day_11_task_2_simple_input_2(self):
+        self.assertEqual((232, 251, 12), day_11_task_2(42))
+
+    def test_day_11_task_2_input(self):
+        self.assertEqual((-1, -1, 0), day_11_task_2(2568))

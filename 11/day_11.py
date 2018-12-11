@@ -16,6 +16,10 @@ def day_11_task_1(serial_number):
     return max_x, max_y
 
 
+def day_11_task_2(serial_number):
+    return -1, -1, -1
+
+
 def square_power(x, y, grid):
     square_sum = 0
     for i in range(x, x + 3):
