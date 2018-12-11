@@ -1,18 +1,30 @@
 import unittest
 
-from .day_11 import day_11_task_1, power_level
+from .day_11 import power_level, square_power, build_grid, day_11_task_1
 
 
 class TestDay11Task1(unittest.TestCase):
 
-    def test_day_11_task_1_simple_1(self):
+    def test_day_11_power_level_1(self):
         self.assertEqual(-5, power_level(122, 79, 57))
 
-    def test_day_11_task_1_simple_2(self):
+    def test_day_11_power_level_2(self):
         self.assertEqual(0, power_level(217, 196, 39))
 
-    def test_day_11_task_1_simple_3(self):
+    def test_day_11_power_level_3(self):
         self.assertEqual(4, power_level(101, 153, 71))
 
+    def test_day_11_square_power_1(self):
+        self.assertEqual(29, square_power(33, 45, build_grid(18)))
+
+    def test_day_11_square_power_2(self):
+        self.assertEqual(30, square_power(21, 61, build_grid(42)))
+
+    def test_day_11_task_1_simple_input_1(self):
+        self.assertEqual((33, 45), day_11_task_1(18))
+
+    def test_day_11_task_1_simple_input_2(self):
+        self.assertEqual((21, 61), day_11_task_1(42))
+
     def test_day_11_task_1__input(self):
-        self.assertEqual(0, day_11_task_1(2568))
+        self.assertEqual((21, 68), day_11_task_1(2568))
