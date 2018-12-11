@@ -40,4 +40,4 @@ class TestDay11Task2(unittest.TestCase):
         self.assertEqual((232, 251, 12), day_11_task_2(42))
 
     def test_day_11_task_2_input(self):
-        self.assertEqual((-1, -1, 0), day_11_task_2(2568))
+        self.assertEqual((90, 201, 15), day_11_task_2(2568))

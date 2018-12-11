@@ -17,13 +17,29 @@ def day_11_task_1(serial_number):
 
 
 def day_11_task_2(serial_number):
-    return -1, -1, -1
+    grid = build_grid(serial_number)
+
+    max_x = 0
+    max_y = 0
+    max_size = 0
+    max_square_power = 0
+    for size in range(1, 301):
+        for x in range(0, 301 - size):
+            for y in range(0, 301 - size):
+                current_power = square_power(x, y, grid, size)
+                if current_power > max_square_power:
+                    max_square_power = current_power
+                    max_x = x
+                    max_y = y
+                    max_size = size
+
+    return max_x, max_y, max_size
 
 
-def square_power(x, y, grid):
+def square_power(x, y, grid, size=3):
     square_sum = 0
-    for i in range(x, x + 3):
-        for j in range(y, y + 3):
+    for i in range(x, x + size):
+        for j in range(y, y + size):
             square_sum += grid[i][j]
     return square_sum
 
