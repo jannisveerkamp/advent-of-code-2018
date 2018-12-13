@@ -114,6 +114,10 @@ def day_13_task_1(grid):
                         return cart.x, cart.y
 
 
+def day_13_task_2(grid):
+    return -1, -1
+
+
 def print_grid_carts(grid, carts):
     temp_grid = grid.copy()
 
