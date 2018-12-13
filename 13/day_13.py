@@ -35,6 +35,30 @@ class Cart:
         elif self.dir == CART_DOWN:
             self.y += 1
 
+    def turn_if_needed(self, grid):
+        if grid[self.y][self.x] == CURVE_1:
+            if self.dir == CART_UP:
+                self.dir = CART_RIGHT
+            elif self.dir == CART_LEFT:
+                self.dir = CART_DOWN
+            elif self.dir == CART_DOWN:
+                self.dir = CART_LEFT
+            elif self.dir == CART_RIGHT:
+                self.dir = CART_UP
+
+        if grid[self.y][self.x] == CURVE_2:
+            if self.dir == CART_UP:
+                self.dir = CART_LEFT
+            elif self.dir == CART_LEFT:
+                self.dir = CART_UP
+            elif self.dir == CART_DOWN:
+                self.dir = CART_RIGHT
+            elif self.dir == CART_RIGHT:
+                self.dir = CART_DOWN
+
+        if grid[self.y][self.x] == CROSS:
+            self.turn()
+
     def turn(self):
         if self.dir == CART_LEFT and self.next_intersection_turn == CART_LEFT:
             self.dir = CART_DOWN
@@ -82,29 +106,7 @@ def day_13_task_1(grid):
         for i in range(len(carts)):
             cart = carts[i]
             cart.move()
-
-            if grid[cart.y][cart.x] == CURVE_1:
-                if cart.dir == CART_UP:
-                    cart.dir = CART_RIGHT
-                elif cart.dir == CART_LEFT:
-                    cart.dir = CART_DOWN
-                elif cart.dir == CART_DOWN:
-                    cart.dir = CART_LEFT
-                elif cart.dir == CART_RIGHT:
-                    cart.dir = CART_UP
-
-            if grid[cart.y][cart.x] == CURVE_2:
-                if cart.dir == CART_UP:
-                    cart.dir = CART_LEFT
-                elif cart.dir == CART_LEFT:
-                    cart.dir = CART_UP
-                elif cart.dir == CART_DOWN:
-                    cart.dir = CART_RIGHT
-                elif cart.dir == CART_RIGHT:
-                    cart.dir = CART_DOWN
-
-            if grid[cart.y][cart.x] == CROSS:
-                cart.turn()
+            cart.turn_if_needed(grid)
 
             for j in range(len(carts)):
                 if i != j:
@@ -115,7 +117,25 @@ def day_13_task_1(grid):
 
 
 def day_13_task_2(grid):
-    return -1, -1
+    carts = get_initial_cart_positions(grid)
+
+    while True:
+        carts.sort()
+        copy = list(carts)
+        for cart in copy:
+            # cart = carts[i]
+            cart.move()
+            cart.turn_if_needed(grid)
+
+            for other_cart in copy:
+                if cart != other_cart:
+                    if cart.y == other_cart.y and cart.x == other_cart.x:
+                        # BOOM Crash!
+                        print("Boom Crash!")
+                        carts.remove(cart)
+                        carts.remove(other_cart)
+        if len(carts) == 1:
+            return carts[0].x, carts[0].y
 
 
 def print_grid_carts(grid, carts):
