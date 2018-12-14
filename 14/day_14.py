@@ -16,4 +16,23 @@ def day_14_task_1(iterations):
 
 
 def day_14_task_2(score_sequence):
-    return -1
+    recipes = [3, 7]
+    elf_1 = 0
+    elf_2 = 1
+    length = len(score_sequence)
+    score_ints = list(map(int, score_sequence))
+
+    while True:
+        new_score = recipes[elf_1] + recipes[elf_2]
+        if new_score > 9:
+            recipes.append(1)
+            if recipes[-length:] == score_ints:
+                break
+        recipes.append(new_score % 10)
+        if recipes[-length:] == score_ints:
+            break
+
+        elf_1 = (elf_1 + 1 + recipes[elf_1]) % len(recipes)
+        elf_2 = (elf_2 + 1 + recipes[elf_2]) % len(recipes)
+
+    return len(recipes) - length

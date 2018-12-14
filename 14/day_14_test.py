@@ -35,5 +35,4 @@ class TestDay14Task2(unittest.TestCase):
         self.assertEqual(2018, day_14_task_2("59414"))
 
     def test_day_14_task_1_input(self):
-        self.assertEqual(0, day_14_task_2("6289129761"))
-        # 825401 too low
+        self.assertEqual(20207075, day_14_task_2("825401"))
