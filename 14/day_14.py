@@ -13,3 +13,7 @@ def day_14_task_1(iterations):
         elf_2 = (elf_2 + 1 + recipes[elf_2]) % len(recipes)
 
     return "".join(str(x) for x in recipes[iterations:iterations + 10])
+
+
+def day_14_task_2(score_sequence):
+    return -1
