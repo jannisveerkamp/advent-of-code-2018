@@ -17,6 +17,5 @@ class TestDay14Task1(unittest.TestCase):
     def test_day_14_task_1_simple_4(self):
         self.assertEqual("5941429882", day_14_task_1(2018))
 
-    @unittest.skip("speedy!")
     def test_day_14_task_1_input(self):
-        self.assertEqual("fail", day_14_task_1(825401))
+        self.assertEqual("6289129761", day_14_task_1(825401))
