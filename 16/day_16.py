@@ -70,6 +70,10 @@ def day_16_task_1(instructions):
     return three_or_more
 
 
+def day_16_task_2(instructions, programm):
+    return -1
+
+
 def parse_instructions(instructions):
     chunks = [instructions[i:i + 3] for i in range(0, len(instructions), 4)]
 
