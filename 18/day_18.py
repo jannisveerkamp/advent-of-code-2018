@@ -5,11 +5,17 @@ TREE = "|"
 YARD = "#"
 
 
+def day_18_task_2(yard, minutes):
+    if minutes > 451:
+        minutes = (minutes - 451) % 28 + 451
+    return day_18_task_1(yard, minutes)
+
+
 def day_18_task_1(yard, minutes):
     yard = parse_yard(yard)
     # print_yard(yard)
 
-    for _ in range(minutes):
+    for i in range(minutes):
         y_copy = copy.deepcopy(yard)
 
         for row in range(len(y_copy)):
@@ -23,8 +29,11 @@ def day_18_task_1(yard, minutes):
                 elif y_copy[row][column] == YARD:
                     if count_around(row, column, YARD, y_copy) == 0 or count_around(row, column, TREE, y_copy) == 0:
                         yard[row][column] = OPEN
-        # print_yard(yard)
 
+    return resource_value(yard)
+
+
+def resource_value(yard):
     wooded = sum(x.count(TREE) for x in yard)
     lumberyards = sum(x.count(YARD) for x in yard)
     return wooded * lumberyards
